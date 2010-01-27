@@ -1,5 +1,6 @@
 from django import template
 from django.utils.safestring import mark_safe
+from django.template.defaultfilters import striptags, force_escape
 
 bbmodule = __import__('bbcode',level=0)
 
@@ -43,6 +44,12 @@ class BBCodeNode(template.Node):
             return ''
         else:
             return mark_safe(parsed)
+
+@register.filter(name='bbcode')
+def bbcode_filter(content):
+    parsed, errors = bbmodule.parse(content, 
+            strict=True, auto_discover=True)
+    return mark_safe(parsed)
 
 @register.tag
 def bbcode(parser, token):

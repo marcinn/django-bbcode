@@ -1,11 +1,13 @@
 from bbcode import *
+from bbcode import settings
 import re
 
 class Smilies(SelfClosingTagNode):
     open_pattern = re.compile(':(?P<name>[a-zA-Z-]+):')
     def parse(self):
         name = self.match.groupdict()['name']
-        return '<img src="/media/smilies/%s.gif" alt="%s" />' % (name, name)
+        return '<img src="%s%s.gif" alt="%s" />' % (
+                settings.SMILEY_MEDIA_URL, name, name)
         
 
 class AlternativeSmilie(SelfClosingTagNode):
@@ -16,7 +18,8 @@ class AlternativeSmilie(SelfClosingTagNode):
         
     def parse(self):
         alias = self.match.group()
-        return '<img src="/media/smilies/%s.gif" alt="%s" />' % (self.alias, alias)
+        return '<img src="%s%s.gif" alt="%s" />' % (
+                settings.SMILEY_MEDIA_URL, self.alias, alias)
     
     
 class LOL(AlternativeSmilie):
