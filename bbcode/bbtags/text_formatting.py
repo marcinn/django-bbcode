@@ -391,7 +391,7 @@ class Quote(TagNode):
     close_pattern = re.compile(patterns.closing % 'quote')
     
     def parse(self):
-        return '<div class="quote">%s</div>' % self.parse_inner()
+        return '<blockquote>%s</blockquote>' % self.parse_inner()
 
 
 class Text(ArgumentTagNode):
