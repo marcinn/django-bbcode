@@ -156,7 +156,7 @@ class Youtube(TagNode):
     
     
 class AutoDetectURL(SelfClosingTagNode):
-    open_pattern = re.compile('((ht|f)tps?:\/\/([-\w\.]+)+(:\d+)?(\/([\w\/_\.-]*(\?\S+)?)?)?)')
+    open_pattern = re.compile('((ht|f)tps?:\/\/([-\w\.]+)+(:\d+)?(\/([\w\/_\.,-]*(\?\S+)?)?)?)')
 
     def parse(self):
         url = self.match.group()
